@@ -4,16 +4,18 @@
   Define terms and link to docs.github.com.
 -->
 
-## Step 4: Merge your changes
+## Step 4: 合并你的修改
 
-_Nicely done! :partying_face:_
+_做得很棒! :partying_face:_
 
-You've added a matrix strategy to your workflow file that is now running on four different versions of node `[14, 16, 18, 20]` instead of the single hard-coded version of only `14`.
+现在，你已经为工作流添加了矩阵策略，workflow 会分别在 `[14, 16, 18, 20]` 四个不同的 Node 版本上运行，而不再是固定的单一版本 `14`。
 
-We'll now merge your changes so that your workflow file changes will be part of the `main` branch.
+接下来，我们要把这些改动合并到 `main` 分支，让你的工作流正式生效。
 
-### :keyboard: Activity: Create and merge your pull request
+### :keyboard: 实操环节：创建并合并你的 Pull Request
 
-1. Merge your changes from `reusable-workflow` into `main`. If you created the pull request in step 1, open that PR and click on **Merge pull request**. If you did not create the pull request earlier, you can do it now by following the instructions in step 1.
-1. Optionally, click **Delete branch** to delete your `reusable-workflow` branch.
-1. Wait about 20 seconds for actions to run, then refresh this page (the one you're following instructions from) and an action will automatically close this step and open the next one.
+1. 将 `reusable-workflow` 分支合并到 `main`。
+    * 如果你在步骤 1 已经创建了 PR，现在打开那个 PR 并点击 **Merge pull request**。
+    * 如果你之前没有创建 PR，现在可以按照步骤 1 的说明补上一份，然后再执行合并。
+2. （可选）点击 **Delete branch** 删除 `reusable-workflow` 分支。
+3. 等待大约 20 秒后刷新当前教程页面，本步骤会自动完成并进入下一步。

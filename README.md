@@ -9,9 +9,13 @@
   Add your open source license, GitHub uses MIT license.
 -->
 
-# Reusable workflows and matrix strategies
+[English](https://github.com/skills/reusable-workflows) | 中文
 
-_Make a workflow reusable, call it in another workflow, and use a matrix strategy to run multiple versions._
+> 本课程翻译自 Github Skills，全部课程请点击 [这里查看](https://www.github-zh.com/getting-started)
+
+# 可复用的工作流 & 矩阵策略
+
+_本课程中，我们将创建一个可复用的工作流，在另一个工作流中调用它，并使用[矩阵策略](https://docs.github.com/zh/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations) 同时运行多个版本。_
 
 </header>
 
@@ -23,24 +27,25 @@ _Make a workflow reusable, call it in another workflow, and use a matrix strateg
 
 ## Welcome
 
-Reusable workflows offer a simple and powerful way to avoid copying and pasting workflows across your repositories, and adding a matrix strategy lets you use variables in a single job definition to automatically create multiple job runs.
+创建可复用的工作流，可降低人工维护成本，避免在多个仓库中回来复制代码。
+而结合[矩阵策略](https://docs.github.com/zh/actions/how-tos/write-workflows/choose-what-workflows-do/run-job-variations)， 则可以在单个作业定义中使用变量，自动组合出多个运行版本。
 
-- **Who is this for**: Developers, DevOps engineers, students, managers, teams, GitHub users.
-- **What you'll learn**: How to create and use reusable workflows, create a matrix strategy, trigger workflows, and find workflow logs.
-- **What you'll build**: An Actions workflow with a matrix strategy that calls a reusable workflow to output multiple versions of node.
-- **Prerequisites**: In this course you will work with pull requests and YAML workflow files. We recommend you take the [Introduction to GitHub](https://github.com/skills/introduction-to-github) course first or be familiar with GitHub basics, and the [Hello GitHub Actions](https://github.com/skills/hello-github-actions) course for an introduction to GitHub Actions and workflow files.
-- **How long**: This course can be finished in less than one hour.
-- **Attribution**: This Skills course was inspired by a [demo video](https://www.youtube.com/watch?v=MBpyouQtY_M) created by Mickey Gousset ([@mickeygousset](https://github.com/mickeygousset)).
+- **目标人群**: 开发者、运维、学生、管理者、团队成员、GitHub 用户。
+- **你将学到**: 如何编写和使用可复用工作流、如何创建矩阵策略、如何触发工作流，如何查看Actions日志。
+- **你将完成**: 一个带有矩阵策略的 Actions 工作流，它会调用一个可复用工作流，并输出多个 Node.js 版本。
+- **先决条件**: 本课程会用到 Pull Request 和 YAML workflow 文件。建议你先学习 [GitHub 入门课程](https://github.com/github-china/introduction-to-github)，或已经熟悉 GitHub 基本操作；同时也建议看过 [Hello GitHub Actions](https://github.com/github-china/hello-github-actions)，以了解 Actions 的基本概念。
+- **课程时长**: 不到一小时。
+- **致谢**: 本课程灵感来自[@mickeygousset](https://github.com/mickeygousset)的一段[演示视频](https://www.youtube.com/watch?v=MBpyouQtY_M)。
 
-In this course, you will:
+在本课程中，你将完成以下步骤：
 
-1. Make a reusable workflow
-2. Add a job
-3. Add a matrix strategy
-4. Merge your pull request
-5. Trigger the workflow
+1. 创建一个可复用的工作流（workflow）
+2. 添加一个新作业（job）
+3. 添加矩阵策略（matrix strategy）
+4. 合并你的 Pull Request
+5. 触发 workflow
 
-### How to start this course
+### 如何开始课程
 
 <!-- For start course, run in JavaScript:
 'https://github.com/new?' + new URLSearchParams({
@@ -53,14 +58,14 @@ In this course, you will:
 }).toString()
 -->
 
-[![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=skills&template_name=reusable-workflows&owner=%40me&name=skills-reusable-workflows&description=My+clone+repository&visibility=public)
+[![start-course](https://user-images.githubusercontent.com/1221423/235727646-4a590299-ffe5-480d-8cd5-8194ea184546.svg)](https://github.com/new?template_owner=github-china&template_name=reusable-workflows&owner=%40me&name=skills-reusable-workflows&description=My+clone+repository&visibility=public)
 
-1. Right-click **Start course** and open the link in a new tab.
-2. In the new tab, most of the prompts will automatically fill in for you.
-   - For owner, choose your personal account or an organization to host the repository.
-   - We recommend creating a public repository, as private repositories will [use Actions minutes](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions).
-   - Scroll down and click the **Create repository** button at the bottom of the form.
-3. After your new repository is created, wait about 20 seconds, then refresh the page. Follow the step-by-step instructions in the new repository's README.
+1. 右键点击上方 **Start course** 按钮，选择在新标签页中打开链接。
+2. 在新页面中根据系统提示新建一个仓库。
+   - 仓库名称、描述这些字段系统已经帮我们自动填充好了，您可以按需修改。
+   - 建议选择公开仓库，因为私有仓库有[GitHub Actions 分钟数限制](https://docs.github.com/en/billing/managing-billing-for-github-actions/about-billing-for-github-actions)。
+   - 最后点击 Create repository 按钮
+3. 仓库创建完毕后，等待大约 20 秒（等待Action执行），然后刷新页面。注意是刷新您仓库的页面，不是本课程的页面。如果页面没有变化，请继续等待。然后按照 README 中的步骤一步步进行。
 
 <footer>
 

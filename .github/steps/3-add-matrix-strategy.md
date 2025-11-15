@@ -4,14 +4,19 @@
   Define terms and link to docs.github.com.
 -->
 
-## Step 3: Add a matrix strategy to your workflow
+## Step 3: 为工作流添加矩阵策略（matrix strategy）
 
-_Well done! :sparkles:_
+_干得漂亮! :sparkles:_
 
-Your **My Starter Workflow** now has a job that outputs the node version of 14 and calls the reusable workflow called **Reusable Workflow**. It then prints a message to the Actions logs of the node version for the build. Now, we haven't checked the Actions logs at the point to see the message, but don't worry, we'll get there after this next step. Let's improve our **My Starter Workflow** a little more by adding a matrix strategy.
+你的 My Starter Workflow 现在已能调用 Reusable Workflow。
+它会在 Actions 日志中打印类似 “The node version to use is: 14” 的消息。虽然我们还没实际查看日志，但别急，下一步就会看到。
 
-**What is a matrix strategy**: A matrix strategy lets you use variables in a single job definition to automatically create multiple job runs that are based on the combinations of the variables. For example, you can use a matrix strategy to test your code in multiple versions of a language or on multiple operating systems. Below is an example:
+现在，我们来进一步优化这个工作流：不再只运行一个固定的版本，而是通过矩阵策略（matrix strategy）同时测试多个 Node.js 版本。
 
+**什么是矩阵策略**: 矩阵策略允许你在一个 job 中定义多个变量，GitHub Actions 会根据变量的所有组合自动生成多个 job 运行。
+比如你想让代码在不同 node 版本、不同操作系统下都跑一遍，就可以用 matrix 实现，而不用手写多个 job。
+
+例如下面：
 ```yaml
 jobs:
   example_matrix:
@@ -21,18 +26,26 @@ jobs:
         os: [ubuntu-latest, windows-latest]
 ```
 
-To define a matrix strategy inside a job, you first need to define the matrix with the keyword `strategy` followed by the nested keyword `matrix`. You can then define variables for the matrix. In the above example, the variables are `version` with the values of `10, 12, and 14`, and another variable called `os` with the values of `ubuntu-latest and windows latest`.
+要使用矩阵策略，先在 job 中添加 `strategy` 关键字，再嵌套一个 `matrix` 块。这里我们定义了两个变量：
 
-The `example_matrix` job will run for each possible combination of the variables. So, in the above example, the workflow will run six jobs, one for each combination of the os and version variables. If you want to run a job for multiple versions, using a matrix strategy is a great solution over writing out 6 different jobs.
+* `version`: 10、12、14
+* `os`: ubuntu-latest、windows-latest
 
-Let's add a matrix strategy to the **My Starter Workflow** so we can run our job on different versions of node instead of the hard-coded single verison of 14.
+Actions 会将它们进行组合运行，因此总共会执行 **6 个 job**（3×2）。
+相较于重复写 6 个 job，矩阵策略显然更优雅、更易维护。
 
-### :keyboard: Activity: Use a matrix strategy to run multiple versions
+现在，让我们也给 **My Starter Workflow** 加上矩阵策略，让它用不同的 node 版本执行同一个 job，而不是固定写死 `14`。
 
-1. In the same `my-starter-workflow.yml` file, add a `strategy` keyword under the `call-reusable-workflow` job.
-1. Under `strategy`, add a `matrix` keyword.
-1. Define the `nodeversion` variable to run over the following versions of node `[14, 16, 18, 20]`.
-1. Replace the hard-coded `node` paramter of 14 used in the `with` command, and call the `nodeversion` in the matrix by using the following syntax `${{ matrix.nodeversion }}`. Below is that your job should look like:
+### :keyboard: 实操环节：使用矩阵策略同时运行多个 node 版本
+
+1. 打开 `my-starter-workflow.yml` 文件。
+2. 在 `call-reusable-workflow` 这个 job 下添加 `strategy`。
+3. 在 `strategy` 下添加 `matrix`。
+4. 定义一个名为 `nodeversion` 的变量，让它依次运行以下 node 版本：
+   `[14, 16, 18, 20]`
+5. 将原本写死的 node 值 `14` 替换为矩阵中的值，使用语法：
+   `${{ matrix.nodeversion }}`
+   修改后的 job 示例：
 
    ```yaml
    call-reusable-workflow:
@@ -44,5 +57,5 @@ Let's add a matrix strategy to the **My Starter Workflow** so we can run our job
        node: ${{ matrix.nodeversion }}
    ```
 
-1. To commit your changes, click **Start commit**, and then **Commit changes**.
-1. Wait about 20 seconds for actions to run, then refresh this page (the one you're following instructions from) and an action will automatically close this step and open the next one.
+6. 点击 **Start commit** → **Commit changes** 提交修改。
+7. 等待大约 20 秒后刷新当前教程页面，该步骤会自动完成并进入下一步。

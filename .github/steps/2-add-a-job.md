@@ -4,13 +4,11 @@
   Define terms and link to docs.github.com.
 -->
 
-## Step 2: Add a job to call the reusable workflow
+## Step 2: 添加一个 Job 来调用可复用工作流
 
-_Nice work! :tada: You made a workflow reusable!_
+_:tada: 你已经成功让一个 workflow 变得可复用了!_
 
-Now that you have a reusable workflow, you can call it in another workflow within a new or existing job. But before we do that, let's take a minute to understand what our reusable workflow is doing by looking at the content of the file.
-
-**Understanding the file contents of your reusable workflow**
+现在，你已经有了一个可复用工作流，接下来就可以在其他 workflow 中调用它。不过，在动手之前，先花一分钟了解一下这个可复用工作流具体做了什么。
 
 ```yaml
 name: Reusable Workflow
@@ -34,18 +32,21 @@ jobs:
           echo "The node version to use is: ${{ inputs.node }}"
 ```
 
-The reusable workflow requires an `input` of `node` in order for the workflow to work. You need to make sure that the other workflow you are using to call this reusable workflow outputs a node version. If a node input is detected, the workflow will kick off a job called `build` that runs on ubuntu-latest.
+它要求调用方必须传入一个名为 `node` 的输入参数（input），否则无法运行。随后它会启动名为 `build` 的 job，并在 `ubuntu-latest` 环境上执行
 
-The step within the `build` job uses an action called `checkout@v4` to checkout the code and then a step to output the input value by running an echo command to print to the Actions log console the following message, `The node version to use is: ${{ inputs.node }}`. The node input here is the output node value you need to have in your other workflow.
+`build` job 里有两个步骤：
 
-Okay, now that we know what the reusable workflow is doing, let's now add a new job to another workflow called **my-starter-workflow** to call our reusable workflow. We can do this by using the `uses:` command and then setting the path to the workflow we want to use. We also need to make sure we define that node input or the reusable workflow won't work.
+1. 使用 `actions/checkout@v4` 检出代码；
+2. 接着通过 echo 命令在 Actions 日志中打印出传入的 Node.js 版本，例如：`The node version to use is: 14`。
 
-### :keyboard: Activity: Add a job to your workflow to call the reusable workflow
+了解完这个可复用 workflow 的逻辑后，接下来我们要在另一个 workflow（**my-starter-workflow**）里新增一个 job，通过 `uses:` 引用我们刚才的可复用工作流。同时记得传入 `node` 参数，否则复用流程不会执行。
 
-1. Navigate to the `.github/workflows/` folder and open the `my-starter-workflow.yml` file.
-1. Add a new job to the workflow called `call-reusable-workflow`.
-1. Add a `uses` command and path the command to the `reusable-workflow.yml` file.
-1. Add a `with` command to pass in a `node` paramater and set the value to `14`.
+### :keyboard: 实操环节
+
+1. 打开 `.github/workflows/` 目录，找到并打开 `my-starter-workflow.yml`。
+2. 在 workflow 中新增一个名为 `call-reusable-workflow` 的 job。
+3. 使用 `uses` 指定我们要调用的 workflow 文件路径（即 `reusable-workflow.yml`）。
+4. 用 `with` 传入参数 `node`，并将它的值设为 `14`：
 
    ```yaml
    call-reusable-workflow:
@@ -54,5 +55,5 @@ Okay, now that we know what the reusable workflow is doing, let's now add a new 
        node: 14
    ```
 
-1. To commit your changes, click **Start commit**, and then **Commit changes**.
-1. Wait about 20 seconds for actions to run, then refresh this page (the one you're following instructions from) and an action will automatically close this step and open the next one.
+5. 点击 **Start commit**，然后点击 **Commit changes** 提交修改。
+6. 等待约 20 秒后刷新本页面。GitHub Actions 会自动检测到你的更改，并进入下一步。

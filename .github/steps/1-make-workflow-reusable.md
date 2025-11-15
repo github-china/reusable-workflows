@@ -6,29 +6,36 @@
   Encourage users to open new tabs for steps!
 -->
 
-## Step 1: Make a workflow reusable
+## Step 1: 让 workflow 变的可复用
 
-_Welcome to "Reusable Workflows and Matrix Strategies"! :wave:_
+_欢迎来到 "Reusable Workflows and Matrix Strategies" 课程! :wave:_
 
-You can do a lot with GitHub Actions! You can automate repetitive tasks, build continuous integration and continuous deployment pipelines, and customize essentially any part of your software development workflow. It doesn't matter if you're just learning about workflows and GitHub Actions for the first time or you're well exerpienced with the process, you'll quickly find yourself repeating automation jobs and steps within the same workflow, and even using the dreaded copy and paste method for workflows across multiple repositories.
+GitHub Actions 的使用范围非常广：你可以用它来自动化重复性任务、搭建 CI/CD 流水线，几乎涵盖软件开发流程中的任何环节。
 
-Is there a solution to reduce these repetitive tasks? Yes, I'm glad you asked :wink: Enter **reusable workflows**, a simple and powerful way to avoid copying and pasting workflows across your repositories.
+无论你是刚接触 GitHub Actions，还是已经经验丰富，你都会很快发现：同样的任务和步骤总是在不同 workflow 里重复出现，甚至需要在不同仓库之间不断复制粘贴，既麻烦又不利于维护。
 
-**What are the benefits of using reusable workflows?**: Reusable workflows are … reusable. Reusable workflows let you DRY (don’t repeat yourself) your Actions configurations, so you don’t need to copy and paste your workflows from one repository to another.
+有没有办法减少这些重复工作呢？当然有！这就是我们今天学习的主题：**可复用的工作流（reusable workflows）**。
 
-- Case in point: if you have three different Node applications and you’re building them all the same way, you can use one reusable workflow instead of copying and pasting your workflows again and again.
+**使用可复用工作流有什么好处？**
+顾名思义，可以被重复使用。通过将流程抽成可复用的 workflow，不用在多个仓库中重复维护相同的 workflow 文件。
 
-**I have a workflow, how do I make it reusable?**: A reusable workflow is just like any GitHub Actions workflow with one key difference: it includes a `workflow_call` event trigger, similar to event triggers like `push`, `issues`, and `workflow_dispatch`. This means that all you need to do to make a workflow reusable is to use the workflow call trigger.
+* 举个例子：如果你有三个 Node 项目，它们的构建方式完全一样，那么只需要准备一个可复用 workflow，就不用在三个仓库里来回复制。
 
-Let's get started with our first step to see how this would work!
+**那我已有的 workflow，要怎么改造成可复用工作流？**
+可复用工作流本质上与普通的 GitHub Actions workflow 一样，唯一的区别是它必须包含一个特殊的触发器：`workflow_call`。
+它的作用与 `push`、`issues`、`workflow_dispatch` 类似，但用途是让别的 workflow 可以「调用」它。
 
-### :keyboard: Activity: Add a `workflow_call` trigger to a workflow
+因此，要让一个 workflow 可复用，只需要把触发器改成 `workflow_call` 即可。
 
-1. Open a new browser tab, and navigate to this same repository. Then, work on the steps in your second tab while you read the instructions in this tab.
-1. Navigate to the **Code** tab.
-1. From the **main** branch dropdown, click on the **reusable-workflow** branch.
-1. Navigate to the `.github/workflows/` folder, then select the **reusable-workflow.yml** file.
-1. Replace the `workflow_dispatch` event trigger with the `workflow_call` event trigger. It should look like the following:
+下面我们就动手体验一下。
+
+### :keyboard: 实操环节: 为工作流添加 `workflow_call` 触发器
+
+1. 打开一个新的浏览器标签页，方便一边操作一边阅读教程。
+2. 进入仓库的 **Code** 页。
+3. 切换到 **reusable-workflow** 分支。
+4. 打开 `.github/workflows/` 目录，然后点击 **reusable-workflow.yml**。
+5. 将其中的 `workflow_dispatch` 触发器替换为 `workflow_call`。修改后应如下所示：
 
    ```yaml
    name: Reusable Workflow
@@ -41,6 +48,6 @@ Let's get started with our first step to see how this would work!
            type: string
    ```
 
-1. To commit your changes, click **Start commit**, and then **Commit changes**.
-1. (optional) Create a pull request to view all the changes you'll make throughout this course. Click the **Pull Requests** tab, click **New pull request**, set `base: main` and `compare: reusable-workflow`.
-1. Wait about 20 seconds for actions to run, then refresh this page (the one you're following instructions from) and an action will automatically close this step and open the next one.
+6. 点击 **Start commit**，然后点击 **Commit changes** 提交修改。
+7. （可选）你可以创建一个 Pull Request，方便查看这门课程中所有的修改记录。进入 **Pull Requests** → **New pull request**，选择 `base: main`、`compare: reusable-workflow`。
+8. 等待约 20 秒后刷新本页面。[GitHub Actions](https://docs.github.com/en/actions) 会自动检测到你的更改，并进入下一步。
